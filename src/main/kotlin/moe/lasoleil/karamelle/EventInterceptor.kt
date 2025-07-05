@@ -7,6 +7,7 @@ interface EventInterceptor<T : Any> {
 
     val isActive: Boolean
 
+    @Throws(Throwable::class)
     operator fun invoke(event: T)
 
     companion object {

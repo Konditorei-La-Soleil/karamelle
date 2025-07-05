@@ -138,7 +138,6 @@ class UtilsTest {
     fun `removeAt should return empty array when removing from single-element array`() {
         // Arrange
         val original = arrayOf(true)
-        val expected = emptyArray<Boolean>()
 
         // Act
         val result = original.removeAt(0)
