@@ -1,4 +1,5 @@
 plugins {
+    `java-library`
     `maven-publish`
     kotlin("jvm") version "2.0.0"
 }
@@ -18,6 +19,11 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 kotlin {
