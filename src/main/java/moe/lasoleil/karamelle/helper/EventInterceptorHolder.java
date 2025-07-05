@@ -47,11 +47,6 @@ public interface EventInterceptorHolder {
                 } else {
                     type = method.getParameterTypes()[0];
 
-                    if (type.isPrimitive()) {
-                        throw new IllegalArgumentException("Method " + method.getName() + " has a primitive parameter. Use its wrapper class instead.");
-                    }
-                }
-
                 if (method.getParameterCount() > 1) {
                     throw new IllegalArgumentException("Method " + method.getName() + " has more than one parameter.");
                 }
