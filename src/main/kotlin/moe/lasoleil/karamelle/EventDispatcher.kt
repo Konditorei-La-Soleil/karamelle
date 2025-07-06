@@ -10,7 +10,7 @@ import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-class EventBus(
+class EventDispatcher(
     val identifier: String
 ) {
 
