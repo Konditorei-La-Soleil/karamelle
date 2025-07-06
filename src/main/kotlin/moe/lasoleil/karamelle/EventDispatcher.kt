@@ -194,6 +194,7 @@ class EventDispatcher(
         _state.set(State.IDLE)
     }
 
+    @get:JvmName("state")
     val state: State get() = _state.get()
 
     fun <T : Any> post(event: T): Future<T> {
