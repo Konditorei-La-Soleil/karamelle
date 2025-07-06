@@ -11,8 +11,8 @@ import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-class EventDispatcher(
-    val identifier: String,
+class EventDispatcher @JvmOverloads constructor(
+    val identifier: String = "default",
 ) {
 
     private val _state = AtomicReference(State.IDLE)
@@ -243,6 +243,10 @@ class EventDispatcher(
         return suspendCoroutine { continuation ->
             handleOperation(Operation.GetOrCreateFlow(type, continuation))
         }
+    }
+
+    override fun toString(): String {
+        return "EventDispatcher(identifier='$identifier')"
     }
 
 }
