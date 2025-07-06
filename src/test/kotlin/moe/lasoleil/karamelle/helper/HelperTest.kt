@@ -40,5 +40,22 @@ class HelperTest {
         assertEquals("new", string)
     }
 
+    @Test
+    fun `test holder with primitive interceptor`() {
+        var int = 1
+        val example = object : EventInterceptorHolder {
+            @InterceptorFunction
+            fun onInt(i: Int) {
+                int = i
+            }
+        }
+        val interceptors = EventInterceptorHolder.Helper.resolveInterceptors(example)
+
+        assertEquals(1, interceptors.size)
+        @Suppress("UNCHECKED_CAST")
+        (interceptors[0] as EventInterceptor<Any>).invoke(2)
+        assertEquals(2, int)
+    }
+
 
 }

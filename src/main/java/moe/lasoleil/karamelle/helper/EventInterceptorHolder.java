@@ -46,6 +46,7 @@ public interface EventInterceptorHolder {
                     throw new IllegalArgumentException("Method " + method.getName() + " has no parameters. You should specify the type of the event on annotation or use a method with one parameter.");
                 } else {
                     type = method.getParameterTypes()[0];
+                }
 
                 if (method.getParameterCount() > 1) {
                     throw new IllegalArgumentException("Method " + method.getName() + " has more than one parameter.");
