@@ -15,7 +15,7 @@ class HelperTest {
                 string = "noArg"
             }
         }
-        val interceptors = EventInterceptorHolder.Helper.resolveInterceptors(example)
+        val interceptors = EventInterceptorHolder.resolveInterceptors(example)
 
         assertEquals(1, interceptors.size)
         @Suppress("UNCHECKED_CAST")
@@ -32,7 +32,7 @@ class HelperTest {
                 string = str
             }
         }
-        val interceptors = EventInterceptorHolder.Helper.resolveInterceptors(example)
+        val interceptors = EventInterceptorHolder.resolveInterceptors(example)
 
         assertEquals(1, interceptors.size)
         @Suppress("UNCHECKED_CAST")
@@ -49,7 +49,7 @@ class HelperTest {
                 int = i
             }
         }
-        val interceptors = EventInterceptorHolder.Helper.resolveInterceptors(example)
+        val interceptors = EventInterceptorHolder.resolveInterceptors(example)
 
         assertEquals(1, interceptors.size)
         @Suppress("UNCHECKED_CAST")

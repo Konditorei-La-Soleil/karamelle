@@ -1,6 +1,7 @@
 package moe.lasoleil.karamelle
 
 import kotlinx.coroutines.flow.SharedFlow
+import moe.lasoleil.karamelle.helper.EventInterceptorHolder
 import java.util.IdentityHashMap
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ConcurrentLinkedQueue
@@ -11,7 +12,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class EventDispatcher(
-    val identifier: String
+    val identifier: String,
 ) {
 
     private val _state = AtomicReference(State.IDLE)
@@ -208,7 +209,11 @@ class EventDispatcher(
         }
     }
 
+    fun register(holder: EventInterceptorHolder): Future<Int> =
+        registerAll(interceptors = EventInterceptorHolder.resolveInterceptors(holder).toTypedArray())
+
     fun registerAll(vararg interceptors: EventInterceptor<*>): Future<Int> {
+        require(interceptors.isNotEmpty())
         interceptors.forEach(::validatePriority)
         return completableFuture {
             handleOperation(Operation.RegisterBatch(interceptors = interceptors, it))
@@ -222,7 +227,11 @@ class EventDispatcher(
         }
     }
 
+    fun unregister(holder: EventInterceptorHolder): Future<Int> =
+        unregisterAll(interceptors = EventInterceptorHolder.resolveInterceptors(holder).toTypedArray())
+
     fun unregisterAll(vararg interceptors: EventInterceptor<*>): Future<Int> {
+        require(interceptors.isNotEmpty())
         interceptors.forEach(::validatePriority)
         return completableFuture {
             handleOperation(Operation.UnregisterBatch(interceptors = interceptors, it))
